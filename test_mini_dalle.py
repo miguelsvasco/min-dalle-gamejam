@@ -5,7 +5,7 @@ import argparse
 #!/usr/bin/env python
 #\ coding: utf-8
 
-# Init model - Mega requires 8GB VRAM minimum
+# Init model - Mega requires 8GB VRAM minimum, float32 requires 12GB VRAM
 model = MinDalle(
     models_root='./pretrained/',
     dtype=torch.float32,
@@ -26,7 +26,7 @@ for i in range(args.n):
     print(f'Generating image #{i}')
     image = model.generate_image(
         text=args.prompt,
-        seed=args.seed,
+        seed=args.seed + i,
         grid_size=1,
         is_seamless=False,
         temperature=1,
